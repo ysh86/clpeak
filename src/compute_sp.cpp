@@ -77,6 +77,15 @@ int clPeak::runComputeSP(cl::CommandQueue &queue, cl::Program &prog, device_info
     workPerWI = 4096;
 
     timed = run_kernel(queue, kernel_v4, globalSize, localSize, iters);
+#if 1
+    std::cout << std::endl;
+    std::cout << "===========================================================" << std::endl;
+    std::cout << "globalSize: " << static_cast<const size_t*>(globalSize)[0] << "," << static_cast<const size_t*>(globalSize)[1] << std::endl;
+    std::cout << "localSize:  " << static_cast<const size_t*>(localSize)[0] << "," << static_cast<const size_t*>(localSize)[1] << ", iters: " << iters << std::endl;
+    std::cout << "globalWIs: " << globalWIs << ", workPerWI: " << workPerWI << ", timed: " << timed << std::endl;
+    std::cout << "===========================================================" << std::endl;
+    std::cout << std::endl;
+#endif
 
     gflops = (static_cast<float>(globalWIs) * static_cast<float>(workPerWI)) / timed / 1e3f;
 
